@@ -6,7 +6,7 @@ from database_setup import Base
 
 app = Flask(__name__)
 
-engine = create_engine('postgresql://wilding:password@localhost/playground')
+engine = create_engine('postgresql://vagrant:password@localhost/playground')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()

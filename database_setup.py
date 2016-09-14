@@ -6,5 +6,5 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
-engine = create_engine('postgresql://wilding:password@localhost/playground')
+engine = create_engine('postgresql://vagrant:password@localhost/playground')
 Base.metadata.create_all(engine)
