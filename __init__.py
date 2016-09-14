@@ -11,6 +11,12 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+
+@app.route('/')
+def homepage():
+    return render_template('homepage.html')
+
+
 if __name__ == '__main__':
     app.secret_key = 'secret_key'
     app.debug = True
