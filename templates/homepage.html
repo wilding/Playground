@@ -1,5 +1,56 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h1>Hello World!</h1>
+<a href="{{url_for('newTest')}}">New Test</a>
+<a href="{{url_for('formPlayground')}}">Form Playground</a>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Integer</th>
+            <th>Floatpt</th>
+            <th>String</th>
+            <th>Uni</th>
+            <th>Boolean</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>DateTime</th>
+            <th>Interval</th>
+            <th>Int_Array</th>
+            <th>Str_Array</th>
+            <th>JSON_object</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for test in tests %}
+            <tr>
+                <td>{{test.id}}</td>
+                <td>{{test.integer}}</td>
+                <td>{{test.floatpt}}</td>
+                <td>{{test.string}}</td>
+                <td>{{test.uni}}</td>
+                <td>{{test.boolean}}</td>
+                <td>
+                    {% if test.date %}
+                        {{test.date.toordinal()}}
+                        {% else %}
+                        {{test.date}}
+                        {% endif %}
+                </td>
+                <td>{{test.time}}</td>
+                <td>
+                    {% if test.datetime %}
+                        {{test.datetime.strftime('%A %B %d, %Y.  %I:%M %p, %Z')}}
+                        {% else %}
+                        {{test.datetime}}
+                        {% endif %}
+                </td>
+                <td>{{test.interval.seconds}}</td>
+                <td>{{test.int_array[0]}}</td>
+                <td>{{test.str_array}}</td>
+                <td>{{test.json_object['instructions']}}</td>
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

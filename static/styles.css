@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1300px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    border: 1px solid black;
+    height: 50px;
+}
+
+td {
+    border: 1px solid black;
+    height: 30px;
+    text-align: center;
+}

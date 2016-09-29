@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <form action="{{url_for('newTest')}}" method="post">
+        <label>Integer: <input type="number" name="integer"></label><br>
+        <label>Floatpt: <input type="text" name="floatpt"></label><br>
+        <label>String: <input type="text" name="string"></label><br>
+        <label>Uni: <input type="text" name="uni"></label><br>
+        <label>Boolean: <input type="checkbox" name="boolean"></label><br>
+        <label>Date: <input type="date" name="date"></label><br>
+        <label>Time: <input type="time" name="time"></label><br>
+        <label>Datetime: <input type="datetime-local" name="datetime"></label><br>
+        <fieldset>
+            <legend>Interval</legend>
+            <label>Days: <input type="number" name="days"></label><br>
+            <label>Seconds: <input type="number" name="seconds"></label><br>
+            <label>Microseconds: <input type="number" name="microseconds"></label><br>
+        </fieldset>
+        <label>Pickle: <input type="hidden" name="pickle"></label><br>
+        <fieldset>
+            <legend>Int_Array</legend>
+            <label>1: <input type="number" name="int_array1"></label>
+            <label>2: <input type="number" name="int_array2"></label>
+            <label>3: <input type="number" name="int_array3"></label>
+        </fieldset>
+        <fieldset>
+            <legend>Str_Array</legend>
+            <label>1: <input type="text" name="str_array1"></label>
+            <label>2: <input type="text" name="str_array2"></label>
+            <label>3: <input type="text" name="str_array3"></label>
+        </fieldset>
+        <input type="submit" value="Create">
+        <input type="reset">
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
