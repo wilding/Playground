@@ -1,0 +1,37 @@
+# ////////////////////////////  Question 1  ////////////////////////////
+
+If t is an empty string, I immediately return False.  Otherwise, I create a list (t_list) of all letters in t.  Then, I iterate through the letters of s.  If the letter is in t_list, I delete that letter from t_list.  If the letter is not in t_list, t_list gets reset to its original state.  If t_list is ever empty, then the function returns True.  If it iterates all the way through s and t_list never becomes empty, it returns False.
+
+efficiency:
+IF length of s is n and length of t is m, we first have to create t_list which takes O(m) time.  Then we iterate through s, and in the worst case, every letter of s is in t_list, and we have to iterate through t_list to find each letter in order to delete it: O(nm).  When we delete from the list, it forces the list to re-index, which will take O(m) each time.  Therefore, the final worst-case efficiency would work out to O(m + n(m^2)).  To make it more efficient, I could have used a linked list instead of an array for t_list so that the deletion step would take constant time.  Then the efficiency would be O(m + nm), or O(m(n+1)), which approximates to O(nm).  The only extra data structure we have to create is t_list, so the space complexity is O(m).
+
+# ////////////////////////////  Question 2  ////////////////////////////
+
+First, I start by stripping any spaces or punctuation from the input string.  Then I check if the new modified string is a palindrome.  If it is, the string is returned.  If not, I start checking substrings of the modified string.  If we call the length of the modified string n, then I first check substrings of length n - 1.  There are two possible substrings of this length (omitting the last letter, and omitting the first letter). If neither of these substrings are a palindrome, then I start checking substrings of length n - 2, of which there will be 3 (omitting last two letters, omitting the first and last letter, and omitting the first two letters).  This process continues on until a palindrome is found or until it has gone through n - x = 2, since the shortest possible palindrome is 2 letters long.  If there still isn't a palindrome found, None is returned.
+
+efficiency:
+For a modified string of length n, the number of checks will be (n - 1) + (n - 2) + (n - 3)… etc. until (n - x) = 1.  This approximates to a worst-case efficiency of O(n^2).  Each iteration, a string named substring is created (the longest possible being length n used for the first iteration), which makes the space complexity O(n).
+
+# ////////////////////////////  Question 3  ////////////////////////////
+
+Iterate through the edges of the start node (first node in the dict). If the edge's destination is not in the final tree, add the edge to a priority queue. If the edge's destination is already in the final tree, don't add it to the priority queue.  Remove the first edge from the priority queue (the one with the lowest value) and add it to the final tree.  Remove all edges from the priority queue with destinations that are part of the final tree.  Continue recursively using the destination of the last edge added to the final tree as the new start node until every node is part of the final tree, then return the final tree.
+
+efficiency:
+N = # of nodes in the graph, e = # of edges per single node, q = length of priority queue.
+We will run the helper function once per node in the graph, minus the last node, which will be O(N-1), which approximates to O(N).  For each node, we iterate through all its edges: O(N(e)).  In the worst case scenario, all nodes must be added to the end of the priority queue, so we iterate through the full queue, then we insert at the end, which forces the queue to re-index O(N(e(q^2))).  Popping from the queue and adding edges to the final dict are constant time operations, so we don't need to consider those.  When we remove edges from the priority queue, we must traverse through it, then delete edges which forces us to re-index, so the final, worst case efficiency comes out to O(N(e(q^2) + (q^2))).  Once again, this could be made more efficient by using a linked list for the priority queue, which would allow us to insert and delete from the queue in constant time because we wouldn't have to re-index.  In this case, the efficiency would be improved to O(N(eq + q)) = O(N(e+1(q))), which approximates to O(Neq).
+
+We create 2 new data structures: the priority queue and the final tree.  At most, the priority queue would contain all the edges in the graph which we will call E.  The final tree at most can contain all the nodes N.  Therefore the space complexity comes out to O(E + N)
+
+# ////////////////////////////  Question 4  ////////////////////////////
+
+For each of the two given nodes, create a list containing the node value and the values of all its ancestors all the way up to the root.  Iterate through one of the lists, and return the first value that also appears in the other list.
+
+efficiency:
+We create the ancestor lists using the helper function get_ancestors(), which iterates through the tree matrix.  If the tree matrix is length n, this takes O(n) time.  Since we create 2 ancestor lists (one for each node), that takes O(2n) time.  Then we must iterate through one of the ancestor lists.  In the worst case scenario, the node is a leaf and the lowest common ancestor is the root, so we would iterate through a full ancestor list with a length equal to the height of the tree, which we will call H.  Therefore, the worst-case effieciency is O(2n + H).  Since we create 2 new lists of max length H, the worst-case space complexity would be O(2H), which approximates to O(H).
+
+# ////////////////////////////  Question 5  ////////////////////////////
+
+I iterate through the nodes of the linked list.  For each iteration, I traverse m nodes downstream.  If I run out of nodes before I make m traversals, the list is shorter than m, and None is returned (this will only be relevant on the first iteration).  If I run out of nodes on the mth traversal, then the current node is m spaces from the end and I return the value of the current node.
+
+efficiency:
+We iterate through a linked list of length n, and at each step we have to iterate m steps forward, therefore the worst-case efficiency is O(nm).  No new data structures are created, so the space complexity is O(1).
